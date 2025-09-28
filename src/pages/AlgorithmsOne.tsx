@@ -57,7 +57,7 @@ function AlgorithmsOne(){
                     <p className = 'w-full'>An analysis of linear systems of equations gives us that our final rotation matrix from Frame A to Frame B can be written as <InlineMath>{"R_{a\\to b} = BA^T"}</InlineMath>. If you look hard enough, it turns out that this really is just a change of basis formula :)</p>
                     <p className = 'w-full'>Because 3D rotation matrices and quaternions are both part of the same <InlineMath>{"SO(3)"}</InlineMath> group, we can go from our rotation matrix to the final quaternion <ExternalLink link = "https://danceswithcode.net/engineeringnotes/quaternions/quaternions.html#:~:text=Convert%20Rotation%20Matrix%20to%20Quaternion&text=We%20can%20find%20the%20equivalent%20quaternion%20using%20two%20steps.&text=Step%202:%20To%20resolve%20the,in%20steps%201%20and%202.">answer</ExternalLink> with relative ease.</p>
                     <br/>
-                    <hr className = 'border-2'/>
+                    <hr className = 'border-2 w-full'/>
                     <br />
                     <p className = 'w-full'>While it might seem simple and straightforward, TRIAD suffers during times when measurements are noisy (a.k.a, always). In typical situations, people often try to just incorporate more measurements. Unfortunately, though, TRIAD <i>only can ever take 2</i> inputs. For that reason, it's fallen out of favor.</p>
                     </div>
