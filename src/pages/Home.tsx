@@ -13,19 +13,25 @@ function NavButton({ to, text, children }: NavButtonProps) {
         <div className='aspect-square h-[150px] rounded-2xl border-1 cursor-pointer hover:scale-110 flex justify-center items-center'>
             <button onClick={() => navigator(to)} className = 'flex flex-col items-center cursor-pointer justify-center p-[3px]'>
                 {children}
-                <p>{text}</p>
+                <p className = 'w-full'>{text}</p>
             </button>
         </div>
     );
 }
 function Home(){
-    return <div className = 'min-w-fit w-full h-full flex flex-col items-center'>
+    return <div className = 'min-w-fit w-full h-full flex flex-col items-center justify-around'>
         <h1 className = 'text-3xl w-full text-center m-5'>Welcome to ADCS!</h1>
-        <div className = 'w-full flex justify-around'>
+        <div className = 'w-full flex justify-around flex-wrap'>
             <NavButton to = "rotations" text = "Rotations">
                 <MdOutlineScreenRotationAlt size = '75px'></MdOutlineScreenRotationAlt>
             </NavButton>
             <NavButton to = "algos-1" text = "Algorithms: Part One">
+                <FiActivity size = '75px'></FiActivity>
+            </NavButton>
+            <NavButton to = "algos-2" text = "Algorithms: Part Two">
+                <FiActivity size = '75px'></FiActivity>
+            </NavButton>
+            <NavButton to = "algos-3" text = "Algorithms: Part Three">
                 <FiActivity size = '75px'></FiActivity>
             </NavButton>
         </div>

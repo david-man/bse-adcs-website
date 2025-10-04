@@ -5,6 +5,8 @@ import Home from './pages/Home.tsx';
 import Rotations from './pages/Rotations.tsx';
 import App from './App.tsx';
 import AlgorithmsOne from './pages/AlgorithmsOne.tsx';
+import AlgorithmsTwo from './pages/AlgorithmsTwo.tsx';
+import AlgorithmsThree from './pages/AlgorithmsThree.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -12,6 +14,8 @@ const router = createBrowserRouter(
       <Route path = "/" element = {<Home />}></Route>
       <Route path = "rotations" element = {<Rotations />}></Route>
       <Route path = "algos-1" element = {<AlgorithmsOne />}></Route>
+      <Route path = "algos-2" element = {<AlgorithmsTwo />}></Route>
+      <Route path = "algos-3" element = {<AlgorithmsThree />}></Route>
       <Route path = "*" element = {<Navigate to = "/" />}></Route>
     </Route>
   )

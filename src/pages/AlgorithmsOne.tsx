@@ -64,7 +64,7 @@ function AlgorithmsOne(){
             </InfoDropdown>
             <InfoDropdown outerString = 'QuEST'>
                 <div className = 'flex flex-col justify-items items-center min-w-fit'>
-                    <p className = 'w-full'>In the sphere of memory-less (dependent only on current inputs) spacecraft attitude determination algorithms, QuEST is the contemporary counterpart to TRIAD.</p>
+                    <p className = 'w-full'>In the sphere of general memory-less (dependent only on current inputs) spacecraft attitude determination algorithms, QuEST is the contemporary counterpart to TRIAD.</p>
                     <br/>
                     <hr className = 'w-full border-2'/>
                     <br />
@@ -170,7 +170,7 @@ function AlgorithmsOne(){
                     <br/>
                     <p className = 'w-full'> In addition, it shouldn't be forgotten that QuEST <b>only performs better than TRIAD when there are more than 2 vector pairs</b>. This is because, when there are only 2 vector pairs, QuEST has no extra information to filter out noise with, and thus it and TRIAD will converge to the same result.</p>
                     <br/>
-                    <p className = 'w-8/10'><i>Congratulations on getting through this section. I know it was probably not the easier thing, but hey, if you can get through this, you can get through anything. :)</i></p>
+                    <p className = 'w-8/10'><i>Congratulations on getting through this section. I know it was probably not the easier thing, but hey, if you can get through this, you can get through anything :). Again, take a break if you have to, and if you have any questions, feel free to send me an email through the help menu or message me directly.</i></p>
                 </div>
             </InfoDropdown>
         </div>)
