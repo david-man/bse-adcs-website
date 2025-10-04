@@ -12,7 +12,7 @@ function Help(){
             </div>
             <div className = 'w-full flex'>
                 <p className = 'p-[3px] pr-[5px]'>Contact Info: </p>
-                <input type="text" name="name" className = 'min-w-[200px] w-3/10 border-2 rounded-2xl p-[5px]'></input>
+                <input type="text" name="contact" className = 'min-w-[200px] w-3/10 border-2 rounded-2xl p-[5px]'></input>
             </div>
             <div className = 'w-full flex'>
                 <p className = 'p-[5px]'>Question: </p>
