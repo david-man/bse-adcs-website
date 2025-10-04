@@ -170,8 +170,8 @@ function Rotations(){
                     <li>Quaternions do not have a closed form integral. Thus, one must discretize its integration. This is most often done through an first order Euler approximation, with the rotational derivative given by angular velocities defined by a rotation vector. 
                         <br/>
                         <br/>
-                        Explicitly, if quaternions are considered as simply 4-component vectors, 
-                        <BlockMath>{`\\frac{dq}{dt} = \\frac{1}{2}\\Omega q, \\Omega = 
+                        Explicitly, if quaternions are considered as simply 4-component vectors, a quaternion from body to world would rotate as such
+                        <BlockMath>{`\\frac{dq}{dt} = \\frac{1}{2}q\\Omega, \\Omega = 
                         \\begin{pmatrix} 
                         0 & -\\omega_x &-\\omega_y & -\\omega_z 
                         \\\\
@@ -185,6 +185,7 @@ function Rotations(){
                         q_{t + 1} = \\text{normalize}(q + \\Delta t \\frac{dq}{dt})`}</BlockMath>
                         We'll prove this below.
                     </li>
+                    <li>Quaternion multiplication follows the chain rule: i.e, <InlineMath>{'\\frac{dq_1q_2}{dt} = \\frac{dq_1}{dt}q_2 + q_1\\frac{dq_2}{dt}'}</InlineMath></li>
                 </ul>
                 <br/>
                 <hr className = 'w-full border-2'></hr>
@@ -193,18 +194,18 @@ function Rotations(){
                 <BlockMath>{"q = \\text{cos}(\\frac{\\theta}{2}) + \\text{sin}(\\frac{\\theta}{2})\\mathbf{u}, |q| = 1"}</BlockMath>
                 <p className = 'w-full'>For a rotational change <InlineMath>{'\\Delta q'}</InlineMath>, start by defining an equivalent rotation vector defined by an angular velocity <InlineMath>{'\\omega'}</InlineMath>, where the rotational quantity is  <InlineMath>{'|\\omega|\\Delta t'}</InlineMath> and the axis of rotation is <InlineMath>{'u = \\frac{\\omega}{|\\omega|}'}</InlineMath>. Then, we have </p>
                 <BlockMath>{"\\Delta q_w = \\text{cos}(\\frac{|\\omega|\\Delta t}{2}), [\\Delta q_x, \\Delta q_y, \\Delta q_z] = \\text{sin}(\\frac{|\\omega|\\Delta t}{2})\\frac{\\omega}{|\\omega|}"}</BlockMath>
-                <p className = 'w-full'>Now, let's approximate <InlineMath>{'q_{t + \\Delta} = \\Delta q * q'}</InlineMath>, and let's recall the limit definition of the derivative <InlineMath>{'\\frac{df}{dx} = \\lim_{h \\to 0}\\frac{f(x + h) - f(x)}{h}'}</InlineMath>. It follows that the derivative of a quaternion would be </p>
+                <p className = 'w-full'>Now, let's approximate <InlineMath>{'q_{t + \\Delta} = q * \\Delta q'}</InlineMath>, which encodes a small spin in the body frame caused by an angular velocity that we know(in the body frame), followed by a translation into the true frame. Let let's recall the limit definition of the derivative <InlineMath>{'\\frac{df}{dx} = \\lim_{h \\to 0}\\frac{f(x + h) - f(x)}{h}'}</InlineMath>. It follows that the derivative of a quaternion would be </p>
                 <BlockMath>{`
                 \\frac{dq}{dt} = \\lim_{\\Delta t \\to 0}\\frac{q_{t + \\Delta t} - q}{\\Delta t} = \\\\
-                \\lim_{\\Delta t \\to 0}\\frac{\\Delta t * q - q}{\\Delta t} = \\\\
-                \\lim_{\\Delta t \\to 0}\\frac{(\\Delta t - \\mathbf{1})q}{\\Delta t} = \\\\
-                \\lim_{\\Delta t \\to 0}\\frac{([\\text{cos}(\\frac{|\\omega|\\Delta t}{2}), \\text{sin}(\\frac{|\\omega|\\Delta t}{2})\\frac{\\omega_x}{|\\omega|}, \\text{sin}(\\frac{|\\omega|\\Delta t}{2})\\frac{\\omega_y}{|\\omega|}, \\text{sin}(\\frac{|\\omega|\\Delta t}{2})\\frac{\\omega_z}{|\\omega|}] - \\mathbf{1})q}{\\Delta t} = \\\\
+                \\lim_{\\Delta t \\to 0}\\frac{q * \\Delta t - q}{\\Delta t} = \\\\
+                \\lim_{\\Delta t \\to 0}\\frac{q(\\Delta t - \\mathbf{1})}{\\Delta t} = \\\\
+                \\lim_{\\Delta t \\to 0}\\frac{q([\\text{cos}(\\frac{|\\omega|\\Delta t}{2}), \\text{sin}(\\frac{|\\omega|\\Delta t}{2})\\frac{\\omega_x}{|\\omega|}, \\text{sin}(\\frac{|\\omega|\\Delta t}{2})\\frac{\\omega_y}{|\\omega|}, \\text{sin}(\\frac{|\\omega|\\Delta t}{2})\\frac{\\omega_z}{|\\omega|}] - \\mathbf{1})}{\\Delta t} = \\\\
                 \\text{Considering the known limits of cosine and sine as they approach zero...} \\\\
-                \\lim_{\\Delta t \\to 0}\\frac{([1, (\\frac{|\\omega|\\Delta t}{2})\\frac{\\omega_x}{|\\omega|}, (\\frac{|\\omega|\\Delta t}{2})\\frac{\\omega_y}{|\\omega|}, (\\frac{|\\omega|\\Delta t}{2})\\frac{\\omega_z}{|\\omega|}] - [1, 0, 0, 0])q}{\\Delta t} = \\\\
-                \\lim_{\\Delta t \\to 0}\\frac{([0, (\\frac{|\\omega|\\Delta t}{2})\\frac{\\omega_x}{|\\omega|}, (\\frac{|\\omega|\\Delta t}{2})\\frac{\\omega_y}{|\\omega|}, (\\frac{|\\omega|\\Delta t}{2})\\frac{\\omega_z}{|\\omega|}])q}{\\Delta t} = \\\\
-                \\lim_{\\Delta t \\to 0}([0, (\\frac{|\\omega|}{2})\\frac{\\omega_x}{|\\omega|}, (\\frac{|\\omega|}{2})\\frac{\\omega_y}{|\\omega|}, (\\frac{|\\omega|}{2})\\frac{\\omega_z}{|\\omega|}])q = \\\\
-                [0, \\frac{\\omega_x}{2}, \\frac{\\omega_y}{2}, \\frac{\\omega_z}{2}]q = \\\\
-                \\frac{1}{2} \\omega_{pure} q
+                \\lim_{\\Delta t \\to 0}\\frac{q([1, (\\frac{|\\omega|\\Delta t}{2})\\frac{\\omega_x}{|\\omega|}, (\\frac{|\\omega|\\Delta t}{2})\\frac{\\omega_y}{|\\omega|}, (\\frac{|\\omega|\\Delta t}{2})\\frac{\\omega_z}{|\\omega|}] - [1, 0, 0, 0])}{\\Delta t} = \\\\
+                \\lim_{\\Delta t \\to 0}\\frac{q([0, (\\frac{|\\omega|\\Delta t}{2})\\frac{\\omega_x}{|\\omega|}, (\\frac{|\\omega|\\Delta t}{2})\\frac{\\omega_y}{|\\omega|}, (\\frac{|\\omega|\\Delta t}{2})\\frac{\\omega_z}{|\\omega|}])}{\\Delta t} = \\\\
+                \\lim_{\\Delta t \\to 0}(q[0, (\\frac{|\\omega|}{2})\\frac{\\omega_x}{|\\omega|}, (\\frac{|\\omega|}{2})\\frac{\\omega_y}{|\\omega|}, (\\frac{|\\omega|}{2})\\frac{\\omega_z}{|\\omega|}]) = \\\\
+                q[0, \\frac{\\omega_x}{2}, \\frac{\\omega_y}{2}, \\frac{\\omega_z}{2}] = \\\\
+                \\frac{1}{2} q \\omega_{pure} 
                 `}</BlockMath>
                 <p className = 'w-full'>Here, <InlineMath>{'\\omega_{pure}'}</InlineMath> is known as the pure quaternion form of the angular velocity. By plugging in these numbers into the Hamilton product to multiply the quaternions together and then normalizing everything, we can find that the derivative of the quaternion will be the same as described above.</p>
                 <br />
