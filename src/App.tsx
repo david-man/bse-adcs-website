@@ -1,7 +1,7 @@
 import { Outlet, useNavigate } from 'react-router-dom'
 import './App.css'
 import { useState } from 'react'
-import { FaHome, FaRegMoon, FaMoon} from "react-icons/fa";
+import { FaHome, FaRegMoon, FaMoon, FaGithub} from "react-icons/fa";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false)
@@ -13,12 +13,18 @@ function App() {
           <FaHome className = 'h-1/2 hover:h-3/5 w-full aspect-square'>
           </FaHome>
         </button>
-        <button onClick = {() => {setDarkMode(!darkMode)}} className = 'h-full cursor-pointer absolute right-0 aspect-square mr-[5px] flex items-center'>
+        <button onClick = {() => {window.open('https://github.com/david-man/bse-adcs-website','_blank')}} className = 'h-full min-w-fit cursor-pointer absolute right-[50px] aspect-square mr-[5px] flex items-center'>
+          <FaGithub className = 'h-1/2 hover:h-3/5 w-full aspect-square'>
+          </FaGithub>
+        </button>
+        <button onClick = {() => {setDarkMode(!darkMode)}} className = 'h-full min-w-fit cursor-pointer absolute right-0 aspect-square mr-[5px] flex items-center'>
+          
+          
           {darkMode ? 
-            <FaMoon className = 'h-1/2 hover:h-3/5 w-full aspect-square'>
+            <FaMoon className = 'h-1/2 w-full hover:h-3/5 aspect-square'>
             </FaMoon>
           :
-            <FaRegMoon className = 'h-1/2 hover:h-3/5 w-full aspect-square'>
+            <FaRegMoon className = 'h-1/2 w-full hover:h-3/5 aspect-square'>
             </FaRegMoon>
           }
         </button>
